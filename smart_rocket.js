@@ -39,9 +39,9 @@ class Rocket{
         if(frameCount%this.frameSpeed==0){
           this.index++;
         }
-        if(fitness(this.x,this.y,destX,destY)>this.fit){
-            this.fit = fitness(this.x,this.y,destX,destY);
-        }
+        
+        this.fit = fitness(this.x,this.y,destX,destY);
+        
     }
     applyForce(xF,yF){
         this.x+=xF;
