@@ -26,7 +26,7 @@ class Rocket{
           let tY = this.w*nThruster[1];
           fill(255,0,0);
           if(i==this.index){
-              fill(0,255,0);
+              fill(255,255,0);
           }
           ellipse(this.x+tX,this.y+tY,4,4);
           i++
