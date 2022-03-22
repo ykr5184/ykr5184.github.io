@@ -15,6 +15,9 @@ function updateGrid(){
             }
             if (isLetter(box.textContent)){
                 box.classList.add('entered')
+                if (box.classList.contains('displayed')){
+                    box.classList.remove('entered')
+                }
             }
 
         }
@@ -82,12 +85,15 @@ function revealWord(guess){
         if (letter===state.secret[i]){
             box.classList.add('right');
             box.classList.remove('entered');
+            box.classList.add('displayed');
         } else if(state.secret.includes(letter)){
             box.classList.add('wrong');
             box.classList.remove('entered');
+            box.classList.add('displayed');
         } else{
             box.classList.add('empty');
-            box.classList.remove('entered')
+            box.classList.remove('entered');
+            box.classList.add('displayed');
         }
     }, (i+1)*animation_duration / 2);
         box.classList.add('animated');
