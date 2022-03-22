@@ -10,6 +10,13 @@ function updateGrid(){
         for(let j = 0; j < state.grid[i].length; j++){
             const box = document.getElementById(`box${i}${j}`)
             box.textContent = state.grid[i][j];
+            if (box.textContent==''){
+                box.classList.remove('entered')
+            }
+            if (isLetter(box.textContent)){
+                box.classList.add('entered')
+            }
+
         }
     }
 }
@@ -74,10 +81,13 @@ function revealWord(guess){
         setTimeout(()=>{
         if (letter===state.secret[i]){
             box.classList.add('right');
+            box.classList.remove('entered');
         } else if(state.secret.includes(letter)){
             box.classList.add('wrong');
+            box.classList.remove('entered');
         } else{
             box.classList.add('empty');
+            box.classList.remove('entered')
         }
     }, (i+1)*animation_duration / 2);
         box.classList.add('animated');
