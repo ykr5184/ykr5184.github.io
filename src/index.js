@@ -100,15 +100,28 @@ function revealWord(guess){
         box.style.animationDelay = `${(i * animation_duration) / 2}ms`
     }
     const isWinner = state.secret===guess;
-    const isGameOver = state.currentRow===5;
+    const isGameOver = state.currentRow===5 && !isWinner;
     setTimeout(()=>{
-    if(isWinner){
-        alert('Congratulations!')
-    } else if(isGameOver){
+    if(isGameOver){
         alert(`Better luck next time! The word was ${state.secret}.`);
     }
     }, 3*animation_duration);
+    if(isWinner){
+        for(let i = 0; i<5; i++){
+            setTimeout(()=>{
+                const box = document.getElementById(`box${row}${i}`)
+                box.classList.add('won')
+            },((6+i)*animation_duration)/2)
+        }
+        setTimeout(()=>{
+            alert('Congratulations!')
+        }, 16*animation_duration/2)
+        
+    }
 }
+ 
+    
+
 function isLetter(key){
     return key.length===1 && key.match(/[a-z]/i);
 }

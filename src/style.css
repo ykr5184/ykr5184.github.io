@@ -53,6 +53,9 @@ body {
 .animated{
   animation: flop 0.5s ease;
 }
+.won{
+  animation: bounce 0.5s ease;
+}
 @keyframes flop{
   0%{
     transform: scaleY(1);
@@ -66,13 +69,13 @@ body {
 }
 @keyframes bounce{
   0%{
-    top: 0;
+    top: 0px;
   }
   50%{
-    top: 20;
+    top: -20px;
   }
   100%{
-    top: 0
+    top: 0px;
   }
 }
 
