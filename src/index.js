@@ -1,4 +1,4 @@
-const dictionary = ['earth','plane','crane','audio','house']
+import {dictionary} from './dictionary.js'
 const state = {
     secret: dictionary[Math.floor(Math.random()*dictionary.length)],
     grid: Array(6).fill().map(()=>Array(5).fill('')),
@@ -77,7 +77,8 @@ function isWordValid(word){
 }
 function revealWord(guess){
     const row = state.currentRow;
-    const animation_duration = 500;
+    const flop_duration = 500;
+    const bounce_duration = 250;
     for(let i = 0; i < 5; i++){
         const box = document.getElementById(`box${row}${i}`)
         const letter = box.textContent;
@@ -95,9 +96,9 @@ function revealWord(guess){
             box.classList.remove('entered');
             box.classList.add('displayed');
         }
-    }, (i+1)*animation_duration / 2);
+    }, (i+1)*flop_duration / 2);
         box.classList.add('animated');
-        box.style.animationDelay = `${(i * animation_duration) / 2}ms`
+        box.style.animationDelay = `${(i * flop_duration) / 2}ms`
     }
     const isWinner = state.secret===guess;
     const isGameOver = state.currentRow===5 && !isWinner;
@@ -105,17 +106,17 @@ function revealWord(guess){
     if(isGameOver){
         alert(`Better luck next time! The word was ${state.secret}.`);
     }
-    }, 3*animation_duration);
+    }, 3*flop_duration);
     if(isWinner){
         for(let i = 0; i<5; i++){
             setTimeout(()=>{
                 const box = document.getElementById(`box${row}${i}`)
                 box.classList.add('won')
-            },((6+i)*animation_duration)/2)
+            },((6*flop_duration+i*bounce_duration)/2))
         }
         setTimeout(()=>{
             alert('Congratulations!')
-        }, 16*animation_duration/2)
+        }, 10*(flop_duration+bounce_duration)/2)
         
     }
 }

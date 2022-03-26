@@ -54,7 +54,7 @@ body {
   animation: flop 0.5s ease;
 }
 .won{
-  animation: bounce 0.5s ease;
+  animation: bounce 0.25s linear;
 }
 @keyframes flop{
   0%{
