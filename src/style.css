@@ -4,9 +4,19 @@ body {
 }
 :root {
   --default: #121213;
+  --opposite: white;
   --empty: #3a3a3c;
   --wrong: #b59f3b;
-  --right: #538d4e;
+  --right: #538e4e;
+  --entered: #565758;
+}
+[data-theme="light"]{
+  --default: white;
+  --opposite: black;
+  --entered: #d4d6db;
+  --empty: #797c7e;
+  --wrong: #cab459;
+  --right: #6aaa64;
 
 }
 #game {
@@ -18,7 +28,7 @@ body {
 
 .grid{
   display: grid;
-  grid-template-rows: repeat(6, auto);
+  grid-template-rows: repeat(8, auto);
   grid-template-columns: repeat(5, auto);
 }
 .box{
@@ -26,7 +36,7 @@ body {
   height: 60px;
   border: 2px solid var(--empty);
   margin: 4px;
-  color: white;
+  color: var(--opposite);
   text-transform: uppercase;
   display: grid;
   place-items: center;
@@ -48,13 +58,16 @@ body {
   border-color: var(--right);
 }
 .box.entered {
-  border-color: #565758;
+  border-color: var(--entered);
 }
 .animated{
   animation: flop 0.5s ease;
 }
 .won{
-  animation: bounce 0.25s linear;
+  animation: bounce 0.25s ease;
+}
+.spun{
+  animation: spin 1s linear;
 }
 @keyframes flop{
   0%{
@@ -76,6 +89,14 @@ body {
   }
   100%{
     top: 0px;
+  }
+}
+@keyframes spin{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
   }
 }
 

@@ -1,10 +1,12 @@
 import {dictionary} from './dictionary.js'
-const state = {
-    secret: dictionary[Math.floor(Math.random()*dictionary.length)],
-    grid: Array(6).fill().map(()=>Array(5).fill('')),
+var state = {
+    number: Math.floor(Math.random()*dictionary.length),
+    secret: '',
+    grid: Array(8).fill().map(()=>Array(5).fill('')),
     currentRow: 0,
     currentCol: 0,
 };
+state.secret = dictionary[state.number];
 function updateGrid(){
     for(let i = 0; i < state.grid.length; i++){
         for(let j = 0; j < state.grid[i].length; j++){
@@ -37,7 +39,7 @@ function drawBox(container, row, col, letter = ''){
 function drawGrid(container){
     const grid = document.createElement('div');
     grid.className = 'grid';
-    for(let i = 0; i < 6; i++){
+    for(let i = 0; i < 8; i++){
         for(let j = 0; j < 5; j++){
             drawBox(grid,i,j)
         }
@@ -50,8 +52,9 @@ function registerKeyboardEvents(){
         if(key === 'Enter'){
             if (state.currentCol === 5){
                 const word = getCurrentWord();
-                if (isWordValid(word)){
-                    revealWord(word);
+                const isValid = isWordValid(word);
+                if (isValid[0]){
+                    revealWord(word,isValid[1]);
                     state.currentRow++;
                     state.currentCol = 0;
                 }
@@ -73,26 +76,51 @@ function getCurrentWord(){
     return state.grid[state.currentRow].reduce((prev,curr)=>prev+curr);
 }
 function isWordValid(word){
-    return dictionary.includes(word)
+    let isWordValidBool = dictionary.includes(word);
+    let isWordValidInt = dictionary.findIndex(elem => elem==word);
+    return [isWordValidBool,isWordValidInt];
 }
-function revealWord(guess){
+function revealWord(guess,index){
     const row = state.currentRow;
     const flop_duration = 500;
     const bounce_duration = 250;
+    const spin_duration = 1000;
+    const liar = (row+index+state.number)%10;
+    const liarColour = liar%2;
+    const liarBox = (liar-liarColour)/2
+    console.log(liar,liarColour,liarBox)
     for(let i = 0; i < 5; i++){
         const box = document.getElementById(`box${row}${i}`)
         const letter = box.textContent;
         setTimeout(()=>{
         if (letter===state.secret[i]){
+            if(i!=liarBox){
             box.classList.add('right');
+            } else if(liarColour==0){
+            box.classList.add('wrong'); 
+            } else{
+            box.classList.add('empty');
+            }
             box.classList.remove('entered');
             box.classList.add('displayed');
         } else if(state.secret.includes(letter)){
+            if(i!=liarBox){
             box.classList.add('wrong');
+            } else if(liarColour==0){
+            box.classList.add('empty');
+            } else{
+            box.classList.add('right');
+            }
             box.classList.remove('entered');
             box.classList.add('displayed');
         } else{
+            if(i!=liarBox){
             box.classList.add('empty');
+            } else if(liarColour==0){
+            box.classList.add('right');
+            } else{
+            box.classList.add('wrong');
+            }
             box.classList.remove('entered');
             box.classList.add('displayed');
         }
@@ -101,7 +129,7 @@ function revealWord(guess){
         box.style.animationDelay = `${(i * flop_duration) / 2}ms`
     }
     const isWinner = state.secret===guess;
-    const isGameOver = state.currentRow===5 && !isWinner;
+    const isGameOver = state.currentRow===7 && !isWinner;
     setTimeout(()=>{
     if(isGameOver){
         alert(`Better luck next time! The word was ${state.secret}.`);
@@ -110,13 +138,28 @@ function revealWord(guess){
     if(isWinner){
         for(let i = 0; i<5; i++){
             setTimeout(()=>{
+            const box = document.getElementById(`box${row}${i}`);
+            if (box.classList.contains('empty') || box.classList.contains('wrong')){
+                box.classList.add('spun');
+                setTimeout(()=>{
+                box.classList.add('right');
+                },spin_duration);
+                setTimeout(()=>{
+                box.classList.remove('spun');
+                },2*spin_duration);
+                
+            }
+        }, 3*flop_duration);
+        }
+        for(let i = 0; i<5; i++){
+            setTimeout(()=>{
                 const box = document.getElementById(`box${row}${i}`)
                 box.classList.add('won')
-            },((6*flop_duration+i*bounce_duration)/2))
+            },((12*flop_duration+i*bounce_duration+8*spin_duration)/4))
         }
         setTimeout(()=>{
             alert('Congratulations!')
-        }, 10*(flop_duration+bounce_duration)/2)
+        }, (10*flop_duration+12*bounce_duration+3*spin_duration)/2)
         
     }
 }
