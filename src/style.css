@@ -32,8 +32,8 @@ body {
   grid-template-columns: repeat(5, auto);
 }
 .box{
-  width: 60px;
-  height: 60px;
+  width: 10vh;
+  height: 10vh;
   border: 2px solid var(--empty);
   margin: 4px;
   color: var(--opposite);
@@ -41,7 +41,7 @@ body {
   display: grid;
   place-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 2.4rem;
+  font-size: 7vh;
   position: relative;
   
 }

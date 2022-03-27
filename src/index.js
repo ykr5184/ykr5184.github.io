@@ -73,7 +73,7 @@ function registerKeyboardEvents(){
     }
 }
 function getCurrentWord(){
-    return state.grid[state.currentRow].reduce((prev,curr)=>prev+curr);
+    return state.grid[state.currentRow].reduce((prev,curr)=>prev+curr).toLowerCase();
 }
 function isWordValid(word){
     let isWordValidBool = lDictionary.includes(word);
