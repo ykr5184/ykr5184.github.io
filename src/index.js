@@ -1,12 +1,12 @@
-import {dictionary} from './dictionary.js'
+import {sDictionary,lDictionary} from './dictionary.js'
 var state = {
-    number: Math.floor(Math.random()*dictionary.length),
+    number: Math.floor(Math.random()*sDictionary.length),
     secret: '',
     grid: Array(8).fill().map(()=>Array(5).fill('')),
     currentRow: 0,
     currentCol: 0,
 };
-state.secret = dictionary[state.number];
+state.secret = sDictionary[state.number];
 function updateGrid(){
     for(let i = 0; i < state.grid.length; i++){
         for(let j = 0; j < state.grid[i].length; j++){
@@ -76,8 +76,8 @@ function getCurrentWord(){
     return state.grid[state.currentRow].reduce((prev,curr)=>prev+curr);
 }
 function isWordValid(word){
-    let isWordValidBool = dictionary.includes(word);
-    let isWordValidInt = dictionary.findIndex(elem => elem==word);
+    let isWordValidBool = lDictionary.includes(word);
+    let isWordValidInt = lDictionary.findIndex(elem => elem==word);
     return [isWordValidBool,isWordValidInt];
 }
 function revealWord(guess,index){
