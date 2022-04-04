@@ -1,6 +1,10 @@
 html,
 body {
-  background: var(--default)
+  background: var(--default);
+  margin: 0;
+  height: 100%;
+  padding: 0;
+  overflow-y: hidden;
 }
 :root {
   --default: #121213;
@@ -9,21 +13,42 @@ body {
   --wrong: #b59f3b;
   --right: #538e4e;
   --entered: #565758;
+  --empty-entered: #3a3a3c;
 }
 [data-theme="light"]{
   --default: white;
   --opposite: black;
-  --entered: #d4d6db;
-  --empty: #797c7e;
+  --empty: #d4d6db;
+  --entered: #797c7e;
   --wrong: #cab459;
   --right: #6aaa64;
+  --empty-entered: #797c7e;
 
+}
+h1{
+  color: var(--opposite);
+  font-size: 5vh;
 }
 #game {
   display: grid;
-  place-items: center;
+  justify-items: center;
+  align-items: start;
   width: 100%;
-  height: 600px;
+  height: 100%;
+}
+.uibar{
+  width: 100vw;
+  height: 10vh;
+  padding-left: 10vh;
+  
+}
+#colormode{
+  height: 80%;
+  width: 8vh;
+  border-radius: 0;
+  background-color: red;
+  border-color: red;
+  border-style: solid; 
 }
 
 .grid{
@@ -32,30 +57,35 @@ body {
   grid-template-columns: repeat(5, auto);
 }
 .box{
-  width: 10vh;
-  height: 10vh;
+  width: 8vh;
+  height: 8vh;
   border: 2px solid var(--empty);
-  margin: 4px;
+  margin: 1vh;
   color: var(--opposite);
   text-transform: uppercase;
+  text-align: center;
   display: grid;
   place-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 7vh;
+  font-size: 8vh;
   position: relative;
+  line-height: 8vh;
   
 }
-.box.empty {
-  background: var(--empty);
-  border-color: var(--empty);
+.box.empty{
+  background: var(--empty-entered);
+  border-color: var(--empty-entered);
+  color: white;
 }
 .box.wrong {
   background: var(--wrong);
   border-color: var(--wrong);
+  color: white;
 }
 .box.right {
   background: var(--right);
   border-color: var(--right);
+  color: white;
 }
 .box.entered {
   border-color: var(--entered);
@@ -68,6 +98,12 @@ body {
 }
 .spun{
   animation: spin 1s linear;
+}
+.shook{
+  animation-name: shake;
+  animation-duration: 0.2s;
+  animation-iteration-count: 3;
+  animation-timing-function: linear;
 }
 @keyframes flop{
   0%{
@@ -82,13 +118,13 @@ body {
 }
 @keyframes bounce{
   0%{
-    top: 0px;
+    top: 0vh;
   }
   50%{
-    top: -20px;
+    top: -2vh;
   }
   100%{
-    top: 0px;
+    top: 0vh;
   }
 }
 @keyframes spin{
@@ -97,6 +133,23 @@ body {
   }
   100%{
     transform: rotate(360deg);
+  }
+}
+@keyframes shake {
+  0%{
+    left: 0vh;
+  }
+  25%{
+    left: -2vh
+  }
+  50%{
+    left: 0vh;
+  }
+  75%{
+    left: 2vh;
+  }
+  100%{
+    left: 0vh;
   }
 }
 

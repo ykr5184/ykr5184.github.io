@@ -6,6 +6,24 @@ var state = {
     currentRow: 0,
     currentCol: 0,
 };
+const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+if(currentTheme){
+    document.documentElement.setAttribute('data-theme', currentTheme);
+} else{
+    document.documentElement.setAttribute('data-theme','dark');
+}
+function changeColorMode(){
+    let curr = document.documentElement.getAttribute('data-theme');
+    if(curr=='dark'){
+        document.documentElement.setAttribute('data-theme','light');
+        localStorage.setItem('theme','light');
+    } else{
+        document.documentElement.setAttribute('data-theme','dark');
+        localStorage.setItem('theme','dark');
+    }
+}
+const colorModeButton = document.getElementById("colormode");
+colorModeButton.addEventListener("click",changeColorMode);
 state.secret = sDictionary[state.number];
 function updateGrid(){
     for(let i = 0; i < state.grid.length; i++){
@@ -31,14 +49,12 @@ function drawBox(container, row, col, letter = ''){
     box.className = 'box';
     box.id = `box${row}${col}`;
     box.textContent = letter;
-
     container.appendChild(box);
     return box;
 }
 
 function drawGrid(container){
-    const grid = document.createElement('div');
-    grid.className = 'grid';
+    const grid = document.getElementsByClassName('grid')[0];
     for(let i = 0; i < 8; i++){
         for(let j = 0; j < 5; j++){
             drawBox(grid,i,j)
@@ -59,7 +75,15 @@ function registerKeyboardEvents(){
                     state.currentCol = 0;
                 }
                 else {
-                    alert('Not a valid word.');
+                    const shook_duration = 600;
+                    const row = state.currentRow;
+                    for(let i = 0; i<5;i++){
+                        const box = document.getElementById(`box${row}${i}`)
+                        box.classList.add('shook');
+                        setTimeout(()=>{
+                            box.classList.remove('shook')
+                        },shook_duration)
+                    }
                 }
             }
         }
