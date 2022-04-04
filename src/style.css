@@ -14,6 +14,7 @@ body {
   --right: #538e4e;
   --entered: #565758;
   --empty-entered: #3a3a3c;
+  --key: #818384;
 }
 [data-theme="light"]{
   --default: white;
@@ -23,6 +24,7 @@ body {
   --wrong: #cab459;
   --right: #6aaa64;
   --empty-entered: #797c7e;
+  --key: #d4d6db;
 
 }
 h1{
@@ -32,13 +34,13 @@ h1{
 #game {
   display: grid;
   justify-items: center;
-  align-items: start;
   width: 100%;
   height: 100%;
+  row-gap: 2vh;
 }
 .uibar{
   width: 100vw;
-  height: 10vh;
+  height: 8vh;
   padding-left: 10vh;
   
 }
@@ -50,26 +52,53 @@ h1{
   border-color: red;
   border-style: solid; 
 }
+.keyboard-container{
+  height: 200px;
+  min-width: 450px;
+  margin: 0 8px;
 
+}
+.row{
+  display: flex;
+  width: 100%;
+  margin: 0 auto 8px;
+}
+.row > button{
+  height: 55px;
+  flex: 1;
+  border-radius: 4px;
+  border: 0;
+  background-color: var(--key);
+  color: var(--opposite);
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.spacer{
+  flex: 0.5;
+}
+.longKey{
+  flex: 1.5 !important;
+}
 .grid{
   display: grid;
   grid-template-rows: repeat(8, auto);
   grid-template-columns: repeat(5, auto);
+  row-gap: 0.5vh;
+  column-gap: 0.5vh;
 }
 .box{
-  width: 8vh;
-  height: 8vh;
+  width: 4vh;
+  height: 4vh;
   border: 2px solid var(--empty);
-  margin: 1vh;
   color: var(--opposite);
   text-transform: uppercase;
   text-align: center;
   display: grid;
   place-items: center;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 8vh;
+  font-size: 4vh;
   position: relative;
-  line-height: 8vh;
+  line-height: 4vh;
   
 }
 .box.empty{

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +9,53 @@
   <link rel="stylesheet" href="./src/style.css">
   <script src="./src/dictionary.js" type="module"></script>
 </head>
+
 <body>
   <div id="game">
     <div class="uibar">
       <button id="colormode" type="button"></button>
     </div>
     <div class="grid"></div>
-   
+    <div class="keyboard-container">
+      <div class="row">
+        <button id="keyQ">Q</button>
+        <button id="keyW">W</button>
+        <button id="keyE">E</button>
+        <button id="keyR">R</button>
+        <button id="keyT">T</button>
+        <button id="keyY">Y</button>
+        <button id="keyU">U</button>
+        <button id="keyI">I</button>
+        <button id="keyO">O</button>
+        <button id="keyP">P</button>
+      </div>
+      <div class="row">
+        <div class="spacer"></div>
+        <button id="keyA">A</button>
+        <button id="keyS">S</button>
+        <button id="keyD">D</button>
+        <button id="keyF">F</button>
+        <button id="keyG">G</button>
+        <button id="keyH">H</button>
+        <button id="keyJ">J</button>
+        <button id="keyK">K</button>
+        <button id="keyL">L</button>
+        <div class="spacer"></div>
+      </div>
+      <div class="row">
+        <button id="key+" class="longKey">ENTER</button>
+        <button id="keyZ">Z</button>
+        <button id="keyX">X</button>
+        <button id="keyC">C</button>
+        <button id="keyV">V</button>
+        <button id="keyB">B</button>
+        <button id="keyN">N</button>
+        <button id="keyM">M</button>
+        <button id="key-" class="longKey">DEL</button>
+      </div>
+    </div>
   </div>
   <script src="./src/index.js" type="module"></script>
 </body>
+
 </html>
