@@ -1,7 +1,6 @@
 import { sDictionary, lDictionary } from './dictionary.js'
 var state = {
-    //number: Math.floor(Math.random() * sDictionary.length),
-    number: 1932,
+    number: Math.floor(Math.random() * sDictionary.length),
     secret: '',
     grid: Array(8).fill().map(() => Array(5).fill('')),
     currentRow: 0,
@@ -27,7 +26,20 @@ function changeColorMode() {
 }
 const colorModeButton = document.getElementById("colormode");
 colorModeButton.addEventListener("click", changeColorMode);
-
+const keyboard = document.getElementsByClassName("keyboard-container")[0];
+const rows = keyboard.children;
+for (let i = 0; i < rows.length; i++){
+    const row = rows[i]
+    const keys = row.children;
+    for (let j = 0; j < keys.length; j++){
+        const key = keys[j];
+        if (key.tagName==="BUTTON"){
+            
+            key.addEventListener("click",handleKeyboardEvent);
+        }
+    }
+}
+ 
 function updateGrid() {
     for (let i = 0; i < state.grid.length; i++) {
         for (let j = 0; j < state.grid[i].length; j++) {
@@ -65,39 +77,41 @@ function drawGrid(container) {
     }
 }
 function registerKeyboardEvents() {
-    document.body.onkeydown = (e) => {
-        const key = e.key;
-        if (key === 'Enter') {
-            if (state.currentCol === 5) {
-                const word = getCurrentWord();
-                const isValid = isWordValid(word);
-                if (isValid[0]) {
-                    revealWord(word, isValid[1]);
-                    state.currentRow++;
-                    state.currentCol = 0;
-                }
-                else {
-                    const shook_duration = 600;
-                    const row = state.currentRow;
-                    for (let i = 0; i < 5; i++) {
-                        const box = document.getElementById(`box${row}${i}`)
-                        box.classList.add('shook');
-                        setTimeout(() => {
-                            box.classList.remove('shook')
-                        }, shook_duration)
-                    }
+    document.body.onkeydown = handleKeyboardEvent;
+}
+function handleKeyboardEvent(e) {
+    const key = e.key ? e.key : e.target.id.substring(3);;
+    if (key === 'Enter') {
+        if (state.currentCol === 5) {
+            const word = getCurrentWord();
+            const isValid = isWordValid(word);
+            if (isValid[0]) {
+                revealWord(word, isValid[1]);
+                state.currentRow++;
+                state.currentCol = 0;
+            }
+            else {
+                const shook_duration = 600;
+                const row = state.currentRow;
+                for (let i = 0; i < 5; i++) {
+                    const box = document.getElementById(`box${row}${i}`);
+                    box.classList.add('shook');
+                    setTimeout(() => {
+                        box.classList.remove('shook');
+                    }, shook_duration);
                 }
             }
         }
-        if (key === 'Backspace') {
-            removeLetter();
-        }
-        if (isLetter(key)) {
-            addLetter(key)
-        }
-        updateGrid();
     }
+    if (key === 'Backspace') {
+        removeLetter();
+    }
+    if (isLetter(key)) {
+        addLetter(key);
+    }
+    updateGrid();
 }
+
 function getCurrentWord() {
     return state.grid[state.currentRow].reduce((prev, curr) => prev + curr).toLowerCase();
 }
@@ -122,8 +136,6 @@ function revealWord(guess, index) {
             if (letter === state.secret[i]) {
                 if (i != liarBox) {
                     box.classList.add('right');
-                } else if (liarColour == 0) {
-                    box.classList.add('wrong');
                 } else {
                     box.classList.add('empty');
                 }
@@ -132,11 +144,9 @@ function revealWord(guess, index) {
             } else if (state.secret.includes(letter)) {
                 if (i != liarBox) {
                     box.classList.add('wrong');
-                } else if (liarColour == 0) {
-                    box.classList.add('empty');
                 } else {
-                    box.classList.add('right');
-                }
+                    box.classList.add('empty');
+                } 
                 box.classList.remove('entered');
                 box.classList.add('displayed');
             } else {
