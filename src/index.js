@@ -1,15 +1,16 @@
 import { sDictionary, lDictionary } from './dictionary.js'
 var state = {
-    number: Math.floor(Math.random() * sDictionary.length),
+    number: 314,
+    //number: Math.floor(Math.random() * sDictionary.length),
     secret: '',
     grid: Array(8).fill().map(() => Array(5).fill('')),
     currentRow: 0,
     currentCol: 0,
 };
-
 state.secret = sDictionary[state.number];
+console.log(state.secret);
 const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-if (currentTheme) {
+if (currentTheme) { 
     document.documentElement.setAttribute('data-theme', currentTheme);
 } else {
     document.documentElement.setAttribute('data-theme', 'dark');
@@ -68,7 +69,7 @@ function drawBox(container, row, col, letter = '') {
     return box;
 }
 
-function drawGrid(container) {
+function drawGrid() {
     const grid = document.getElementsByClassName('grid')[0];
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 5; j++) {
@@ -216,9 +217,7 @@ function removeLetter() {
     state.currentCol--;
 }
 function setup() {
-    const game = document.getElementById('game');
-    drawGrid(game)
-
-    registerKeyboardEvents()
+    drawGrid();
+    registerKeyboardEvents();
 }
 setup();
