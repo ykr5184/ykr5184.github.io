@@ -132,7 +132,7 @@ function revealWord(guess, index) {
     console.log(liar, liarColour, liarBox)
     for (let i = 0; i < 5; i++) {
         const box = document.getElementById(`box${row}${i}`)
-        const letter = box.textContent;
+        const letter = box.textContent.toLowerCase();
         setTimeout(() => {
             if (letter === state.secret[i]) {
                 if (i != liarBox) {
@@ -208,7 +208,7 @@ function isLetter(key) {
 }
 function addLetter(letter) {
     if (state.currentCol === 5) return;
-    state.grid[state.currentRow][state.currentCol] = letter;
+    state.grid[state.currentRow][state.currentCol] = letter.toLowerCase();
     state.currentCol++;
 }
 function removeLetter() {
