@@ -1,35 +1,23 @@
-import { sDictionary, lDictionary } from './dictionary.js'
+import { snd, lnd, d } from './dictionary.js'
+const start = new Date(2022,3, 15);
+const today = new Date()
+today.setMilliseconds(0);
+today.setSeconds(0);
+today.setMinutes(0);
+today.setHours(0);
+const currentDay = (today.getTime()-start.getTime())/(24*60*60*1000);
 
-function isDouble (str) {
-    for (var i=0; i<str.length; i++) {
-      if ( str.indexOf(str[i]) !== str.lastIndexOf(str[i]) ) {
-        return true; 
-      }
-    }
-  return false;
-}
-let snd = [];
-for(let i = 0; i < sDictionary.length; i++){
-    if (!isDouble(sDictionary[i])){
-        snd.push(sDictionary[i]);
-    }
-}
-snd = snd
-  .map(value => ({ value, sort: Math.random() }))
-  .sort((a, b) => a.sort - b.sort)
-  .map(({ value }) => value)
-console.log(snd)
 
 var gameIsOver = false;
 var state = {
-    number: 314,
-    //number: Math.floor(Math.random() * sDictionary.length),
-    secret: '',
+    number: currentDay,
+    //number: Math.floor(Math.random() * snd.length),
+    secret: snd[currentDay],
     grid: Array(8).fill().map(() => Array(5).fill('')),
     currentRow: 0,
     currentCol: 0,
 };
-state.secret = sDictionary[state.number];
+
 console.log(state.secret);
 const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
 if (currentTheme) { 
@@ -141,8 +129,11 @@ function getCurrentWord() {
     return state.grid[state.currentRow].reduce((prev, curr) => prev + curr).toLowerCase();
 }
 function isWordValid(word) {
-    let isWordValidBool = lDictionary.includes(word);
-    let isWordValidInt = lDictionary.findIndex(elem => elem == word);
+    let isWordValidBool = lnd.includes(word);
+    let isWordValidInt = lnd.findIndex(elem => elem == word);
+    if(d.includes(word)){
+        console.log('duplicate')
+    }
     return [isWordValidBool, isWordValidInt];
 }
 function revealWord(guess, index) {
