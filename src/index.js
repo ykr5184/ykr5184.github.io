@@ -1,4 +1,26 @@
 import { sDictionary, lDictionary } from './dictionary.js'
+
+function isDouble (str) {
+    for (var i=0; i<str.length; i++) {
+      if ( str.indexOf(str[i]) !== str.lastIndexOf(str[i]) ) {
+        return true; 
+      }
+    }
+  return false;
+}
+let snd = [];
+for(let i = 0; i < sDictionary.length; i++){
+    if (!isDouble(sDictionary[i])){
+        snd.push(sDictionary[i]);
+    }
+}
+snd = snd
+  .map(value => ({ value, sort: Math.random() }))
+  .sort((a, b) => a.sort - b.sort)
+  .map(({ value }) => value)
+console.log(snd)
+
+var gameIsOver = false;
 var state = {
     number: 314,
     //number: Math.floor(Math.random() * sDictionary.length),
@@ -81,6 +103,7 @@ function registerKeyboardEvents() {
     document.body.onkeydown = handleKeyboardEvent;
 }
 function handleKeyboardEvent(e) {
+    if(!gameIsOver){
     const key = e.key ? e.key : e.target.id.substring(3);;
     if (key === 'Enter') {
         if (state.currentCol === 5) {
@@ -111,6 +134,7 @@ function handleKeyboardEvent(e) {
         addLetter(key);
     }
     updateGrid();
+}
 }
 
 function getCurrentWord() {
@@ -167,6 +191,7 @@ function revealWord(guess, index) {
     }
     const isWinner = state.secret === guess;
     const isGameOver = state.currentRow === 7 && !isWinner;
+    gameIsOver = isWinner || isGameOver;
     setTimeout(() => {
         if (isGameOver) {
             alert(`Better luck next time! The word was ${state.secret}.`);
@@ -178,12 +203,12 @@ function revealWord(guess, index) {
                 const box = document.getElementById(`box${row}${i}`);
                 if (box.classList.contains('empty') || box.classList.contains('wrong')) {
                     box.classList.add('spun');
-                    setTimeout(() => {
-                        box.classList.add('right');
-                    }, spin_duration);
+                    
+                    box.classList.add('right');
+                    
                     setTimeout(() => {
                         box.classList.remove('spun');
-                    }, 2 * spin_duration);
+                    }, spin_duration);
 
                 }
             }, 3 * flop_duration);
@@ -192,11 +217,11 @@ function revealWord(guess, index) {
             setTimeout(() => {
                 const box = document.getElementById(`box${row}${i}`)
                 box.classList.add('won')
-            }, ((12 * flop_duration + i * bounce_duration + 8 * spin_duration) / 4))
+            }, ((24 * flop_duration + i * bounce_duration + 8 * spin_duration) / 8))
         }
         setTimeout(() => {
-            alert('Congratulations!')
-        }, (10 * flop_duration + 12 * bounce_duration + 3 * spin_duration) / 2)
+            console.log('Congratulations!')
+        }, ((24 * flop_duration + 100 * bounce_duration + 8 * spin_duration) / 8))
 
     }
 }
