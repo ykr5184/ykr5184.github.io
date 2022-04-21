@@ -29,6 +29,39 @@ body {
   --key: #d4d6db;
 
 }
+.modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(255,255,255,0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+.modalContent{
+  position: relative;
+  min-width: 60vh;
+  max-width: 80vh;
+  min-height: 60vh;
+  max-height: 80vh;
+  border-radius: 5px;
+  background-color: var(--default);
+  overflow: auto;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal.is-visible{
+  visibility: visible;
+  opacity: 1;
+}
 h1{
   color: var(--opposite);
   font-size: 5vh;

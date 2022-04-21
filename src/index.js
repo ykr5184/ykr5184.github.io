@@ -50,7 +50,20 @@ for (let i = 0; i < rows.length; i++){
         }
     }
 }
+const isVisible = "is-visible";
+const statsButton = document.getElementById("statsButton");
+const statsModal = document.getElementById("statsModal")
+statsButton.addEventListener("click", function(){
+    console.log("click")
+    statsModal.classList.add(isVisible);
+})
+
  
+document.addEventListener("click", e => {
+  if (e.target == document.querySelector(".modal.is-visible")) {
+    document.querySelector(".modal.is-visible").classList.remove(isVisible);
+  }
+});
 function updateGrid() {
     for (let i = 0; i < state.grid.length; i++) {
         for (let j = 0; j < state.grid[i].length; j++) {
