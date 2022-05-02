@@ -17,6 +17,7 @@ body {
   --entered: #565758;
   --empty-entered: #3a3a3c;
   --key: #818384;
+  --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
 }
 [data-theme="light"]{
   --default: white;
@@ -27,7 +28,19 @@ body {
   --right: #6aaa64;
   --empty-entered: #797c7e;
   --key: #d4d6db;
+  --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
 
+}
+[data-animation="slideInOutUp"] .modalContent {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.5s var(--bounceEasing);
+}
+
+[data-animation="slideInOutUp"].is-visible .modalContent{
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.2s;
 }
 .modal{
   position: fixed;
@@ -39,10 +52,10 @@ body {
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.05);
   visibility: hidden;
   opacity: 0;
-  transition: all 10s linear;
+  transition: all 0.5s linear;
 }
 .modalContent{
   position: relative;
@@ -50,8 +63,11 @@ body {
   max-width: 80vh;
   min-height: 60vh;
   max-height: 80vh;
+  border-style: ridge;
   border-radius: 5px;
+  border-color: var(--default);
   background-color: var(--default);
+  color: var(--opposite);
   overflow: auto;
   z-index: 2;
   display: flex;
@@ -62,10 +78,7 @@ body {
   visibility: visible;
   opacity: 1;
 }
-h1{
-  color: var(--opposite);
-  font-size: 5vh;
-}
+
 #game {
   display: flex;
   flex-direction: column;
@@ -91,6 +104,7 @@ h1{
   color: var(--opposite);
   font-size: 5vh;
   height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 #buttonSection{
   display: flex;

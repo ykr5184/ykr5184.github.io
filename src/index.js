@@ -58,6 +58,32 @@ statsButton.addEventListener("click", function(){
     statsModal.classList.add(isVisible);
 })
 
+const helpButton = document.getElementById("helpButton");
+const helpModal = document.getElementById("helpModal")
+helpButton.addEventListener("click", function(){
+    console.log("click")
+    helpModal.classList.add(isVisible);
+})
+function loadState(){
+    let previousState = JSON.parse(localStorage.getItem('state'));
+    if(previousState.number==currentDay){
+        state.grid = previousState.grid;
+        state.currentRow = previousState.currentRow;
+        state.currentCol = previousState.currentCol;
+        for(let i = 0; i<state.currentRow; i++){
+            console.log(i)
+            revealWord(getWordAtRow(i),isWordValid(getWordAtRow(i))[1],i)
+        }
+        //if(state.currentCol==5){
+        //    console.log('cur');
+        //    revealWord(getCurrentWord(),isWordValid(getCurrentWord())[1]);
+        //}
+        updateGrid();
+    }
+}
+function uploadState(){
+    localStorage.setItem('state',JSON.stringify(state));
+}
  
 document.addEventListener("click", e => {
   if (e.target == document.querySelector(".modal.is-visible")) {
@@ -81,6 +107,7 @@ function updateGrid() {
 
         }
     }
+    uploadState();
 }
 
 function drawBox(container, row, col, letter = '') {
@@ -141,6 +168,9 @@ function handleKeyboardEvent(e) {
 function getCurrentWord() {
     return state.grid[state.currentRow].reduce((prev, curr) => prev + curr).toLowerCase();
 }
+function getWordAtRow(row){
+    return state.grid[row].reduce((prev, curr) => prev + curr).toLowerCase();
+}
 function isWordValid(word) {
     let isWordValidBool = lnd.includes(word);
     let isWordValidInt = lnd.findIndex(elem => elem == word);
@@ -149,8 +179,8 @@ function isWordValid(word) {
     }
     return [isWordValidBool, isWordValidInt];
 }
-function revealWord(guess, index) {
-    const row = state.currentRow;
+function revealWord(guess, index, row = state.currentRow) {
+    
     const flop_duration = 500;
     const bounce_duration = 250;
     const spin_duration = 1000;
@@ -160,7 +190,7 @@ function revealWord(guess, index) {
     console.log(liar, liarColour, liarBox)
     for (let i = 0; i < 5; i++) {
         const box = document.getElementById(`box${row}${i}`)
-        const letter = box.textContent.toLowerCase();
+        const letter = state.grid[row][i];
         setTimeout(() => {
             if (letter === state.secret[i]) {
                 if (i != liarBox) {
@@ -194,7 +224,7 @@ function revealWord(guess, index) {
         box.style.animationDelay = `${(i * flop_duration) / 2}ms`
     }
     const isWinner = state.secret === guess;
-    const isGameOver = state.currentRow === 7 && !isWinner;
+    const isGameOver = row === 7 && !isWinner;
     gameIsOver = isWinner || isGameOver;
     setTimeout(() => {
         if (isGameOver) {
@@ -247,6 +277,7 @@ function removeLetter() {
 }
 function setup() {
     drawGrid();
+    //loadState();
     registerKeyboardEvents();
 }
 setup();
