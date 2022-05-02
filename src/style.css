@@ -42,7 +42,7 @@ body {
   background: rgba(255,255,255,0.5);
   visibility: hidden;
   opacity: 0;
-  transition: all 0.35s ease-in;
+  transition: all 10s linear;
 }
 .modalContent{
   position: relative;
@@ -101,7 +101,7 @@ h1{
 }
 #colormode{
   height: 80%;
-  width: 8vh;
+  width: 6.4vh;
   border-radius: 0;
   background-color: red;
   border-color: red;
@@ -109,11 +109,11 @@ h1{
 }
 #emptyButton{
   height: 80%;
-  width: 8vh;
+  width: 6.4vh;
 }
 #helpButton{
   height: 80%;
-  width: 8vh;
+  width: 6.4vh;
   border-radius: 0;
   background-color: blue;
   border-color: blue;
@@ -121,7 +121,7 @@ h1{
 }
 #statsButton{
   height: 80%;
-  width: 8vh;
+  width: 6.4vh;
   border-radius: 0;
   background-color: green;
   border-color: green;
@@ -263,6 +263,7 @@ h1{
   }
   .row > button{
     font-size: 9px;
+    height: 6vh;
   }
 }
 
