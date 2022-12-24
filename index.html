@@ -1,77 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liardle</title>
-  <link rel="stylesheet" href="./src/style.css">
-  <script src="./src/dictionary.js" type="module"></script>
-</head>
-
-<body>
-  <div id="game">
-    <div class="uibar">
-      <div id="buttonSection">
-        <button id="helpButton" type="button"></button>
-        <div id="emptyButton"></div>
-      </div>
-      
-      <div id="title">Liardle</div>
-      <div id="buttonSection">
-        <button id="statsButton" type="button"></button>
-        <button id="colormode" type="button"></button>
-      </div>
-      
-    </div>
-    <div class="grid"></div>
-    <div class="keyboard-container">
-      <div class="row">
-        <button id="keyQ">Q</button>
-        <button id="keyW">W</button>
-        <button id="keyE">E</button>
-        <button id="keyR">R</button>
-        <button id="keyT">T</button>
-        <button id="keyY">Y</button>
-        <button id="keyU">U</button>
-        <button id="keyI">I</button>
-        <button id="keyO">O</button>
-        <button id="keyP">P</button>
-      </div>
-      <div class="row">
-        <div class="spacer"></div>
-        <button id="keyA">A</button>
-        <button id="keyS">S</button>
-        <button id="keyD">D</button>
-        <button id="keyF">F</button>
-        <button id="keyG">G</button>
-        <button id="keyH">H</button>
-        <button id="keyJ">J</button>
-        <button id="keyK">K</button>
-        <button id="keyL">L</button>
-        <div class="spacer"></div>
-      </div>
-      <div class="row">
-        <button id="keyEnter" class="longKey">ENTER</button>
-        <button id="keyZ">Z</button>
-        <button id="keyX">X</button>
-        <button id="keyC">C</button>
-        <button id="keyV">V</button>
-        <button id="keyB">B</button>
-        <button id="keyN">N</button>
-        <button id="keyM">M</button>
-        <button id="keyBackspace" class="longKey">DEL</button>
-      </div>
-    </div>
-  </div>
-  <div class="modal" id="statsModal" data-animation="slideInOutUp">
-    <div class="modalContent">Here is some content</div>
-  </div>
-  <div class="modal" id="helpModal" data-animation="slideInOutUp">
-    <div class="modalContent">Here is some content</div>
-  </div>
-  <script src="./src/index.js" type="module"></script>
-</body>
-
+  </head>
+  <body>
+    <main>
+    </main>
+    <script src="sketch.js"></script>
+  </body>
 </html>
