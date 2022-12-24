@@ -185,11 +185,11 @@ function draw() {
         drawSnowmanCard(width / 2, height / 2 + 75 - 125 / 80 * (410 - fc), 1);
     } else if (fc < 410) {
         //drawBoxLid(-PI/120,-5,5,390,true);
-        drawBoxLidReturn(-2.5 * (430 - fc))
+        drawBoxLidReturn(-5 * (430 - fc))
         drawSnowmanCard(width / 2, height / 2 + 75 - 125 / 80 * (410 - fc), 1);
     } else if (fc < 430) {
         //drawBoxLid(-PI/120,-5,5,390,true);
-        drawBoxLidReturn(-2.5 * (430 - fc));
+        drawBoxLidReturn(-5 * (430 - fc));
     }
     drawBoxBody();
 
