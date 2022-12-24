@@ -125,7 +125,7 @@ function drawMessageCard() {
     fill(191, 174, 217);
     rect(0, 0, 100*unit, 100*unit);
     fill(0);
-    textSize(8*sqrt(unit));
+    textSize(8*unit);
     textAlign(LEFT);
     text("Dear அப்பா and அம்மா", -40*unit, -30*unit);
     textSize(12*sqrt(unit));
@@ -134,7 +134,7 @@ function drawMessageCard() {
     text("Merry Christmas!", 0, 0);
     fill(0);
     textAlign(LEFT);
-    textSize(8*sqrt(unit));
+    textSize(8*unit);
     text("From Yuvan!", -40*unit, 30*unit);
     pop();
 }
