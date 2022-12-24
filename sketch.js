@@ -1,11 +1,11 @@
 let fc;
-let unit = 1.5;
+let unit = 1;
 function setup() {
-    createCanvas(600, 600);
+    createCanvas(windowWidth, windowWidth);
     rectMode(CENTER);
     ellipseMode(CENTER);
     frameRate(30);
-    
+    unit = windowWidth/400;
 }
 function drawTree(x, y, d, ox, oy) {
     push()
