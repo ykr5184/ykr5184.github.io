@@ -1,9 +1,11 @@
+let fc;
+let unit = 1.5;
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(600, 600);
     rectMode(CENTER);
     ellipseMode(CENTER);
     frameRate(30);
-    let fc;
+    
 }
 function drawTree(x, y, d, ox, oy) {
     push()
@@ -35,10 +37,10 @@ function drawTree(x, y, d, ox, oy) {
     pop()
 }
 function drawTrees(n) {
-    drawTree(50, -60, -40, 0, -50);
+    drawTree(50*unit, -60*unit, -40*unit, 0*unit, -50*unit);
     for (let i = 1; i < n; i++) {
-        drawTree(50, -60, -40, 70 * i, -50);
-        drawTree(50, -60, -40, -70 * i, -50);
+        drawTree(50*unit, -60*unit, -40*unit,  70 * i*unit, -50*unit);
+        drawTree(50*unit, -60*unit, -40*unit, -70 * i*unit, -50*unit);
     }
 }
 function drawBoxLid(rot, traX, traY, framesPassed) {
@@ -48,13 +50,13 @@ function drawBoxLid(rot, traX, traY, framesPassed) {
     fill(255, 50, 100);
     rotate(rot * fcc);
     translate(traX * fcc, traY * fcc)
-    rect(0, 0, 220, 50);
+    rect(0, 0, 220*unit, 50*unit);
     noFill();
     stroke(255, 0, 0);
     rotate(PI / 12);
-    ellipse(-45, -33, 80, 30);
+    ellipse(-45*unit, -33*unit, 80*unit, 30*unit);
     rotate(-PI / 6);
-    ellipse(45, -33, 80, 30);
+    ellipse(45*unit, -33*unit, 80*unit, 30*unit);
     pop();
 }
 function drawBoxLidReturn(traY) {
@@ -62,70 +64,70 @@ function drawBoxLidReturn(traY) {
     translate(width / 2, height / 2);
     translate(0, traY);
     fill(255, 50, 100);
-    rect(0, 0, 220, 50);
+    rect(0, 0, 220*unit, 50*unit);
     noFill();
     stroke(255, 0, 0);
     rotate(PI / 12);
-    ellipse(-45, -33, 80, 30);
+    ellipse(-45*unit, -33*unit, 80*unit, 30*unit);
     rotate(-PI / 6);
-    ellipse(45, -33, 80, 30);
+    ellipse(45*unit, -33*unit, 80*unit, 30*unit);
     pop();
 }
 function drawBoxBody() {
     push();
     translate(width / 2, height / 2);
     fill(255, 0, 0);
-    rect(0, 100, 200, 150);
+    rect(0, 100*unit, 200*unit, 150*unit);
     noStroke();
     fill(0, 150, 11);
-    rect(0, 100, 20, 148);
-    rect(0, 100, 198, 20);
+    rect(0, 100*unit, 20*unit, 148*unit);
+    rect(0, 100*unit, 198*unit, 20*unit);
     pop();
 }
 function drawSnowmanCard(x, y, sc) {
     push();
     translate(x, y);
-    translate(-50, 0);
+    translate(-50*unit, 0);
     scale(sc, 1);
-    translate(50, 0);
+    translate(50*unit, 0);
     fill(0, 200, 200);
-    rect(0, 0, 100, 100);
+    rect(0, 0, 100*unit, 100*unit);
     fill(255, 255, 255);
     noStroke();
-    ellipse(0, -25, 25);
-    ellipse(0, 0, 30);
-    ellipse(0, 25, 35);
+    ellipse(0, -25*unit, 25*unit);
+    ellipse(0, 0, 30*unit);
+    ellipse(0, 25*unit, 35*unit);
     fill(0, 0, 0);
-    ellipse(-4, -28, 3);
-    ellipse(4, -28, 3);
-    ellipse(-4, -18, 2);
-    ellipse(-1.5, -16, 2);
-    ellipse(1.5, -16, 2);
-    ellipse(4, -18, 2);
-    ellipse(0, 0, 5);
-    ellipse(0, 14, 5);
-    ellipse(0, 28, 5);
+    ellipse(-4*unit, -28*unit, 3*unit);
+    ellipse(4*unit, -28*unit, 3*unit);
+    ellipse(-4*unit, -18*unit, 2*unit);
+    ellipse(-1.5*unit, -16*unit, 2*unit);
+    ellipse(1.5*unit, -16*unit, 2*unit);
+    ellipse(4*unit, -18*unit, 2*unit);
+    ellipse(0, 0, 5*unit);
+    ellipse(0, 14*unit, 5*unit);
+    ellipse(0, 28*unit, 5*unit);
     fill(200, 100, 0);
-    ellipse(0, -22, 3);
+    ellipse(0, -22*unit, 3*unit);
     stroke(0);
-    line(-15, 0, -25, -5);
-    line(15, 0, 25, -5);
-    line(-5, 42, -8, 45);
-    line(5, 42, 8, 45);
+    line(-15*unit, 0, -25*unit, -5*unit);
+    line(15*unit, 0, 25*unit, -5*unit);
+    line(-5*unit, 42*unit, -8*unit, 45*unit);
+    line(5*unit, 42*unit, 8*unit, 45*unit);
     fill(0, 0, 0);
-    rect(0, -35, 25, 4);
-    rect(0, -40, 20, 10);
+    rect(0, -35*unit, 25*unit, 4*unit);
+    rect(0, -40*unit, 20*unit, 10*unit);
     pop();
 }
 function drawMessageCard() {
     push();
-    translate(width / 2, height / 2 - 50);
+    translate(width / 2, height / 2 - 50*unit);
     fill(191, 174, 217);
-    rect(0, 0, 100, 100);
+    rect(0, 0, 100*unit, 100*unit);
     fill(0);
     textSize(8);
     textAlign(LEFT);
-    text("Dear அப்பா and அம்மா", -40, -30);
+    text("Dear அப்பா and அம்மா", -40*unit, -30*unit);
     textSize(12);
     textAlign(CENTER);
     fill(0, 120, 0);
@@ -133,17 +135,17 @@ function drawMessageCard() {
     fill(0);
     textAlign(LEFT);
     textSize(8);
-    text("From Yuvan!", -40, 30);
+    text("From Yuvan!", -40*unit, 30*unit);
     pop();
 }
 function drawBlankCard(sc) {
     push();
-    translate(width / 2 - 100, height / 2 - 50);
-    translate(50, 0);
+    translate(width / 2 - 100*unit, height / 2 - 50*unit);
+    translate(50*unit, 0);
     scale(sc, 1)
-    translate(-50, 0);
+    translate(-50*unit, 0);
     fill(191, 174, 217)
-    rect(0, 0, 100, 100);
+    rect(0, 0, 100*unit, 100*unit);
     pop();
 }
 function draw() {
@@ -154,18 +156,18 @@ function draw() {
         drawBoxLid(0, 0, 0, 0)
 
     } else if (fc < 95) {
-        drawBoxLid(PI / 120, 5, -5, 75);
+        drawBoxLid(PI / 120, 5*unit, -5*unit, 75);
 
     } else if (fc < 115) {
-        drawBoxLid(PI / 120, 5, -5, 75);
-        drawSnowmanCard(width / 2, height / 2 + 75 - 125 / 80 * (fc - 95), 1);
+        drawBoxLid(PI / 120, 5*unit, -5*unit, 75);
+        drawSnowmanCard(width / 2, height / 2 + (75 - 125 / 80 * (fc - 95))*unit, 1);
 
     } else if (fc < 175) {
-        drawSnowmanCard(width / 2, height / 2 + 75 - 125 / 80 * (fc - 95), 1);
+        drawSnowmanCard(width / 2, height / 2 + (75 - 125 / 80 * (fc - 95))*unit, 1);
 
     } else if (fc < 205) {
         drawMessageCard();
-        drawSnowmanCard(width / 2, height / 2 - 50, sqrt(1 - (fc - 175) ** 2 / 900));
+        drawSnowmanCard(width / 2, height / 2 - 50*unit, sqrt(1 - (fc - 175) ** 2 / 900));
 
     } else if (fc < 235) {
         drawMessageCard();
@@ -180,16 +182,16 @@ function draw() {
         drawBlankCard(sqrt(1 - (fc - 270) ** 2 / 900))
     } else if (fc < 330) {
         drawMessageCard();
-        drawSnowmanCard(width / 2, height / 2 - 50, sqrt(1 - (330 - fc) ** 2 / 900));
+        drawSnowmanCard(width / 2, height / 2 - 50*unit, sqrt(1 - (330 - fc) ** 2 / 900));
     } else if (fc < 390) {
-        drawSnowmanCard(width / 2, height / 2 + 75 - 125 / 80 * (410 - fc), 1);
+        drawSnowmanCard(width / 2, height / 2 + (75 - 125 / 80 * (410 - fc))*unit, 1);
     } else if (fc < 410) {
         //drawBoxLid(-PI/120,-5,5,390,true);
-        drawBoxLidReturn(-5 * (430 - fc))
-        drawSnowmanCard(width / 2, height / 2 + 75 - 125 / 80 * (410 - fc), 1);
+        drawBoxLidReturn(-5 * (430 - fc)*unit)
+        drawSnowmanCard(width / 2, height / 2 + (75 - 125 / 80 * (410 - fc))*unit, 1);
     } else if (fc < 430) {
         //drawBoxLid(-PI/120,-5,5,390,true);
-        drawBoxLidReturn(-5 * (430 - fc));
+        drawBoxLidReturn(-5 * (430 - fc)*unit);
     }
     drawBoxBody();
 
