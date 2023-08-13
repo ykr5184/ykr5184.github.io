@@ -1,0 +1,22 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+button {
+  height: 75px;
+  background-color:'green';
+  border-radius:4px;
+  color: white;
+  padding:15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  transition-duration: 0.2s;
+}
+button:hover {
+  font-weight: bold;
+}
